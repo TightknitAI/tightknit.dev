@@ -198,4 +198,28 @@
     color: var(--color-ink);
     text-transform: lowercase;
   }
+
+  .event-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.45rem 0.85rem;
+    background: var(--color-yellow);
+    border: 2.5px solid var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-ink);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease;
+  }
+
+  .event-pill:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-ink);
+  }
 }
