@@ -1,9 +1,17 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "tightknit-dev",
+  "account_id": "01253e2e7d2d382a52411a068a45425b",
   "compatibility_date": "2026-01-01",
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    }
   }
 }
