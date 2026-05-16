@@ -4,6 +4,9 @@ interface Props {
   shadow?: boolean;
   fill?: string;
   shadowFill?: string;
+  variant?: 'plain' | 'weave' | 'hatch';
+  /** Color of the woven/hatched lines drawn over the heart. Default ink. */
+  weaveColor?: string;
 }
 
 const {
@@ -11,10 +14,39 @@ const {
   shadow = false,
   fill = '#ff2d7b',
   shadowFill = '#0a0a0a',
+  variant = 'plain',
+  weaveColor = '#0a0a0a',
 } = Astro.props;
+
+const uid = Math.random().toString(36).slice(2, 10);
+const patternId = `${variant}-${uid}`;
 ---
 
 <svg viewBox="0 0 64 64" class={className} aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  {
+    variant === 'weave' && (
+      <defs>
+        <pattern id={patternId} x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+          {/* basket weave: horiz threads top-left & bot-right; vert threads top-right & bot-left */}
+          <rect x="0" y="1" width="4" height="2" fill={weaveColor} />
+          <rect x="5" y="0" width="2" height="4" fill={weaveColor} />
+          <rect x="1" y="4" width="2" height="4" fill={weaveColor} />
+          <rect x="4" y="5" width="4" height="2" fill={weaveColor} />
+        </pattern>
+      </defs>
+    )
+  }
+  {
+    variant === 'hatch' && (
+      <defs>
+        <pattern id={patternId} x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="6" y2="6" stroke={weaveColor} stroke-width="1.2" />
+          <line x1="6" y1="0" x2="0" y2="6" stroke={weaveColor} stroke-width="1.2" />
+        </pattern>
+      </defs>
+    )
+  }
+
   {
     shadow && (
       <polygon
@@ -26,4 +58,12 @@ const {
   <polygon
     points="11,5 29,5 29,17 35,17 35,5 53,5 53,11 59,11 59,35 53,35 53,41 47,41 47,47 41,47 41,53 35,53 35,59 29,59 29,53 23,53 23,47 17,47 17,41 11,41 11,35 5,35 5,11 11,11"
     fill={fill}></polygon>
+  {
+    variant !== 'plain' && (
+      <polygon
+        points="11,5 29,5 29,17 35,17 35,5 53,5 53,11 59,11 59,35 53,35 53,41 47,41 47,47 41,47 41,53 35,53 35,59 29,59 29,53 23,53 23,47 17,47 17,41 11,41 11,35 5,35 5,11 11,11"
+        fill={`url(#${patternId})`}
+      />
+    )
+  }
 </svg>
