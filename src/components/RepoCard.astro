@@ -17,52 +17,62 @@ const variantClass = {
   cyan: 'brutal-card brutal-card-cyan',
 }[variant];
 
-const headingClass = featured
-  ? 'text-3xl sm:text-4xl lg:text-5xl'
-  : 'text-2xl sm:text-3xl';
+const headingClass = featured ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl';
 
 const isInverse = variant === 'pink';
 const subTextColor = isInverse ? 'text-cream/85' : 'text-ink/80';
 const dividerColor = isInverse ? 'border-cream/25' : 'border-ink/15';
 ---
+
 <a
   href={repo.url}
   target="_blank"
   rel="noopener"
   class={`${variantClass} block p-6 lg:p-7 group focus:outline-none focus-visible:translate-x-[-3px] focus-visible:translate-y-[-3px]`}
 >
-  <div class="flex items-start justify-between gap-4 mb-5">
-    <div class="font-mono text-[11px] uppercase tracking-[0.16em] opacity-80">
-      tightknitai / <span class="opacity-100 font-semibold">{repo.name}</span>
+  <div class="mb-5 flex items-start justify-between gap-4">
+    <div class="font-mono text-[11px] tracking-[0.16em] uppercase opacity-80">
+      tightknitai / <span class="font-semibold opacity-100">{repo.name}</span>
     </div>
-    <span class="font-mono text-[18px] leading-none transition-transform group-hover:rotate-[12deg] group-hover:scale-110" aria-hidden="true">↗</span>
+    <span
+      class="font-mono text-[18px] leading-none transition-transform group-hover:scale-110 group-hover:rotate-[12deg]"
+      aria-hidden="true">↗</span
+    >
   </div>
 
-  <h3 class={`font-display font-bold leading-[0.95] tracking-[-0.03em] ${headingClass} mb-4 break-words`}>
+  <h3
+    class={`font-display font-bold leading-[0.95] tracking-[-0.03em] ${headingClass} mb-4 break-words`}
+  >
     {repo.name}
   </h3>
 
-  {repo.description && (
-    <p class={`text-[15px] lg:text-base leading-snug mb-6 ${subTextColor}`}>
-      {repo.description}
-    </p>
-  )}
+  {
+    repo.description && (
+      <p class={`mb-6 text-[15px] leading-snug lg:text-base ${subTextColor}`}>{repo.description}</p>
+    )
+  }
 
-  {repo.topics.length > 0 && (
-    <div class="flex flex-wrap gap-1.5 mb-6">
-      {repo.topics.slice(0, 5).map((topic) => (
-        <span class="tag">{topic}</span>
-      ))}
-    </div>
-  )}
+  {
+    repo.topics.length > 0 && (
+      <div class="mb-6 flex flex-wrap gap-1.5">
+        {repo.topics.slice(0, 5).map((topic) => (
+          <span class="tag">{topic}</span>
+        ))}
+      </div>
+    )
+  }
 
-  <div class={`flex items-center gap-4 pt-4 border-t-2 ${dividerColor} font-mono text-[12px] uppercase tracking-[0.08em]`}>
-    {repo.language && (
-      <span class="flex items-center gap-1.5">
-        <span class="w-2 h-2 bg-current inline-block" aria-hidden="true"></span>
-        {repo.language}
-      </span>
-    )}
+  <div
+    class={`flex items-center gap-4 pt-4 border-t-2 ${dividerColor} font-mono text-[12px] uppercase tracking-[0.08em]`}
+  >
+    {
+      repo.language && (
+        <span class="flex items-center gap-1.5">
+          <span class="inline-block h-2 w-2 bg-current" aria-hidden="true" />
+          {repo.language}
+        </span>
+      )
+    }
     <span class="flex items-center gap-1">
       <span aria-hidden="true">★</span>
       {repo.stars}

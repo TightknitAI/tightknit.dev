@@ -42,7 +42,9 @@
     color: var(--color-yellow);
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     border-radius: 0;
   }
 
@@ -86,8 +88,12 @@
   }
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   .float-block {
@@ -95,15 +101,22 @@
   }
 
   @keyframes float-block {
-    0%, 100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-12px) rotate(2deg); }
+    0%,
+    100% {
+      transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+      transform: translateY(-12px) rotate(2deg);
+    }
   }
 
   .brutal-card {
     background: #ffffff;
     border: 3px solid var(--color-ink);
     box-shadow: var(--shadow-brutal);
-    transition: transform 120ms ease, box-shadow 120ms ease;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease;
   }
 
   .brutal-card:hover {
@@ -151,7 +164,10 @@
     font-size: 0.875rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease,
+      background 120ms ease;
   }
 
   .brutal-btn:hover {
