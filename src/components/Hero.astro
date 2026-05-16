@@ -1,0 +1,79 @@
+---
+interface Props {
+  repoCount: number;
+}
+const { repoCount } = Astro.props;
+---
+<section class="relative overflow-hidden border-b-[3px] border-ink">
+  <div class="absolute inset-0 grid-bg opacity-90 pointer-events-none"></div>
+
+  <!-- floating 3d blocks -->
+  <div class="absolute top-12 right-[8%] hidden md:block pointer-events-none" aria-hidden="true">
+    <div class="float-block">
+      <div class="w-24 h-24 bg-pink border-[3px] border-ink" style="box-shadow: 8px 8px 0 var(--color-ink);"></div>
+    </div>
+  </div>
+  <div class="absolute bottom-16 right-[22%] hidden lg:block pointer-events-none" aria-hidden="true" style="animation-delay: -2s;">
+    <div class="float-block">
+      <div class="w-16 h-16 bg-cyan border-[3px] border-ink" style="box-shadow: 6px 6px 0 var(--color-ink);"></div>
+    </div>
+  </div>
+  <div class="absolute top-32 left-[6%] hidden lg:block pointer-events-none" aria-hidden="true" style="animation-delay: -4s;">
+    <div class="float-block">
+      <div class="w-20 h-20 bg-yellow border-[3px] border-ink rotate-12" style="box-shadow: 6px 6px 0 var(--color-ink);"></div>
+    </div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 lg:pt-24 pb-20 lg:pb-28">
+    <div class="inline-flex items-center gap-3 mb-8">
+      <span class="inline-block w-2.5 h-2.5 bg-pink animate-pulse"></span>
+      <span class="font-mono text-[12px] uppercase tracking-[0.18em] text-ink/70">
+        {repoCount} open source repos · maintained in public
+      </span>
+    </div>
+
+    <h1 class="font-display font-bold leading-[0.85] tracking-[-0.04em] text-[clamp(3.5rem,12vw,10rem)] mb-2">
+      <span class="block">TOOLS</span>
+      <span class="block">FOR</span>
+      <span class="block stacked-3d text-cream" style="color: var(--color-cream);">SLACK</span>
+      <span class="block">+ AGENTS.</span>
+    </h1>
+
+    <p class="mt-10 max-w-2xl text-lg lg:text-xl font-medium leading-snug text-ink/85">
+      Open source libraries, agents, and developer tools shipped by
+      <a href="https://tightknit.ai" target="_blank" rel="noopener" class="underline decoration-pink decoration-[3px] underline-offset-4 hover:text-pink transition-colors">tightknit.ai</a>.
+      Built in TypeScript. Made to be forked.
+    </p>
+
+    <div class="mt-10 flex flex-wrap items-center gap-4">
+      <a href="#repos" class="brutal-btn">
+        <span>browse repos</span>
+        <span aria-hidden="true">↓</span>
+      </a>
+      <a href="https://github.com/tightknitai" target="_blank" rel="noopener" class="brutal-btn brutal-btn-alt">
+        <span>github org</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- marquee strip -->
+  <div class="bg-ink text-cream border-t-[3px] border-ink overflow-hidden">
+    <div class="marquee py-3 font-mono text-sm uppercase tracking-[0.2em]">
+      {Array.from({ length: 2 }).map(() => (
+        <div class="flex items-center gap-12 px-6 shrink-0">
+          <span>open source</span>
+          <span class="text-yellow">★</span>
+          <span>built in public</span>
+          <span class="text-pink">●</span>
+          <span>typescript-first</span>
+          <span class="text-cyan">◆</span>
+          <span>made by tightknit</span>
+          <span class="text-yellow">★</span>
+          <span>fork it. ship it.</span>
+          <span class="text-pink">●</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+---
+const items = [
+  {
+    n: '01',
+    title: 'Made to be forked.',
+    body: 'Every repo is MIT (or compatible). Lift it, mod it, ship it. The point is that you don\'t have to ask.',
+  },
+  {
+    n: '02',
+    title: 'TypeScript first.',
+    body: 'Strict mode on, types as docs, end-to-end inference where possible. Runtimes: Node, Bun, Cloudflare Workers.',
+  },
+  {
+    n: '03',
+    title: 'Built in public.',
+    body: 'Roadmaps in GitHub issues, releases on a real changelog, and the maintainers actually read PRs.',
+  },
+];
+---
+<section class="relative bg-ink text-cream border-b-[3px] border-ink overflow-hidden">
+  <div class="absolute inset-0 dotted-bg opacity-30 pointer-events-none" style="background-image: radial-gradient(rgba(243,237,224,0.18) 1.5px, transparent 1.5px); background-size: 22px 22px;"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+    <div class="flex items-center gap-4 mb-12">
+      <span class="font-mono text-[12px] uppercase tracking-[0.18em] text-yellow">// principles</span>
+      <div class="h-[2px] bg-yellow/40 flex-1"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12">
+      {items.map((item) => (
+        <div class="border-t-[3px] border-cream/90 pt-6">
+          <div class="font-mono text-[12px] uppercase tracking-[0.18em] text-yellow mb-4">{item.n}</div>
+          <h3 class="font-display font-bold text-3xl lg:text-4xl tracking-[-0.03em] leading-[0.95] mb-4">
+            {item.title}
+          </h3>
+          <p class="text-[15px] lg:text-base leading-relaxed text-cream/80">
+            {item.body}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

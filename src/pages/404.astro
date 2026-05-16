@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="404 — tightknit.dev" description="Page not found.">
+  <Nav />
+  <main class="relative border-b-[3px] border-ink overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-90 pointer-events-none"></div>
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32 min-h-[60vh] flex flex-col justify-center">
+      <div class="font-mono text-[12px] uppercase tracking-[0.18em] text-ink/60 mb-6">
+        // status: 404
+      </div>
+      <h1 class="font-display font-bold leading-[0.85] tracking-[-0.04em] text-[clamp(4rem,18vw,14rem)] stacked-3d" style="color: var(--color-cream);">
+        404.
+      </h1>
+      <p class="mt-10 max-w-xl text-lg font-medium text-ink/85">
+        That page doesn't exist (yet). The repos live below — or head back to{' '}
+        <a href="/" class="underline decoration-pink decoration-[3px] underline-offset-4 hover:text-pink">home</a>.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/" class="brutal-btn">
+          <span>home</span>
+          <span aria-hidden="true">←</span>
+        </a>
+        <a href="https://github.com/tightknitai" target="_blank" rel="noopener" class="brutal-btn brutal-btn-alt">
+          <span>github org</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

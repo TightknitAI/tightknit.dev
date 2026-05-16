@@ -1,0 +1,187 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-cream: #f3ede0;
+  --color-cream-dim: #e8e0cc;
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #1a1a1a;
+  --color-yellow: #ffe600;
+  --color-pink: #ff2d7b;
+  --color-cyan: #00e0ff;
+  --color-lime: #c8ff3a;
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-none: 0;
+  --shadow-brutal: 8px 8px 0 #0a0a0a;
+  --shadow-brutal-lg: 12px 12px 0 #0a0a0a;
+  --shadow-brutal-sm: 4px 4px 0 #0a0a0a;
+  --shadow-brutal-pink: 8px 8px 0 #ff2d7b;
+  --shadow-brutal-yellow: 8px 8px 0 #ffe600;
+  --shadow-brutal-cyan: 8px 8px 0 #00e0ff;
+}
+
+@layer base {
+  html {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-cream);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-yellow);
+  }
+
+  *, *::before, *::after {
+    border-radius: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 2px var(--color-ink);
+    color: transparent;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(10, 10, 10, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 10, 10, 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .dotted-bg {
+    background-image: radial-gradient(rgba(10, 10, 10, 0.12) 1.5px, transparent 1.5px);
+    background-size: 18px 18px;
+  }
+
+  .stacked-3d {
+    text-shadow:
+      2px 2px 0 var(--color-ink),
+      4px 4px 0 var(--color-ink),
+      6px 6px 0 var(--color-pink),
+      8px 8px 0 var(--color-pink),
+      10px 10px 0 var(--color-yellow);
+  }
+
+  .marquee {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .float-block {
+    animation: float-block 6s ease-in-out infinite;
+  }
+
+  @keyframes float-block {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
+  }
+
+  .brutal-card {
+    background: #ffffff;
+    border: 3px solid var(--color-ink);
+    box-shadow: var(--shadow-brutal);
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+
+  .brutal-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-brutal-lg);
+  }
+
+  .brutal-card-pink:hover {
+    box-shadow: var(--shadow-brutal-pink);
+  }
+
+  .brutal-card-yellow {
+    background: var(--color-yellow);
+  }
+  .brutal-card-yellow:hover {
+    box-shadow: var(--shadow-brutal-pink);
+  }
+
+  .brutal-card-pink {
+    background: var(--color-pink);
+    color: var(--color-cream);
+  }
+  .brutal-card-pink:hover {
+    box-shadow: var(--shadow-brutal-yellow);
+  }
+
+  .brutal-card-cyan {
+    background: var(--color-cyan);
+  }
+  .brutal-card-cyan:hover {
+    box-shadow: var(--shadow-brutal-pink);
+  }
+
+  .brutal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: var(--color-ink);
+    color: var(--color-cream);
+    border: 3px solid var(--color-ink);
+    box-shadow: var(--shadow-brutal-sm);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  }
+
+  .brutal-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-brutal);
+    background: var(--color-pink);
+  }
+
+  .brutal-btn-alt {
+    background: var(--color-yellow);
+    color: var(--color-ink);
+  }
+  .brutal-btn-alt:hover {
+    background: var(--color-ink);
+    color: var(--color-yellow);
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: 1.5px solid var(--color-ink);
+    background: var(--color-cream);
+    color: var(--color-ink);
+    text-transform: lowercase;
+  }
+}

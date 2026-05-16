@@ -1,0 +1,47 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="relative bg-cream-dim border-t-[3px] border-ink overflow-hidden">
+  <!-- Giant brand wordmark -->
+  <div class="px-2 pt-12 lg:pt-16 select-none pointer-events-none" aria-hidden="true">
+    <div class="font-display font-bold tracking-[-0.05em] leading-[0.8] text-[clamp(4rem,18vw,14rem)] text-stroke whitespace-nowrap overflow-hidden">
+      TIGHTKNIT.DEV
+    </div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+      <div>
+        <div class="font-mono text-[12px] uppercase tracking-[0.18em] mb-4 text-ink/60">// open source</div>
+        <ul class="space-y-2 font-display text-lg">
+          <li><a href="https://github.com/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">github org →</a></li>
+          <li><a href="#repos" class="hover:text-pink hover:underline decoration-2 underline-offset-4">all repos ↓</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-mono text-[12px] uppercase tracking-[0.18em] mb-4 text-ink/60">// the company</div>
+        <ul class="space-y-2 font-display text-lg">
+          <li><a href="https://tightknit.ai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">tightknit.ai →</a></li>
+          <li><a href="https://tightknit.ai/blog" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">blog →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-mono text-[12px] uppercase tracking-[0.18em] mb-4 text-ink/60">// connect</div>
+        <ul class="space-y-2 font-display text-lg">
+          <li><a href="https://x.com/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">x / twitter →</a></li>
+          <li><a href="https://github.com/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">github →</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t-2 border-ink/15 font-mono text-[12px] uppercase tracking-[0.12em] text-ink/60">
+      <div>© {year} tightknit — made with <span class="text-pink">●</span> in public</div>
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 bg-pink"></span>
+        <span class="inline-block w-2 h-2 bg-yellow"></span>
+        <span class="inline-block w-2 h-2 bg-cyan"></span>
+        <span class="inline-block w-2 h-2 bg-ink"></span>
+      </div>
+    </div>
+  </div>
+</footer>
