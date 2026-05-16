@@ -27,7 +27,7 @@
     "lefthook": "^2.1.6",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.8",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "typescript": "^6.0.3",
     "wrangler": "^4.92.0"
   }
