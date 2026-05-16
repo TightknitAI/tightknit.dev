@@ -28,8 +28,7 @@ const organizationLd = {
   alternateName: 'tightknit.ai',
   url: 'https://tightknit.ai',
   logo: new URL('/favicon.svg', siteUrl).href,
-  description:
-    'tightknit builds community and developer tooling for Slack apps and AI agents.',
+  description: 'tightknit builds community and developer tooling for Slack apps and AI agents.',
   sameAs: [
     'https://github.com/tightknitai',
     'https://www.linkedin.com/company/tightknitai',
@@ -106,9 +105,11 @@ const allJsonLd = [organizationLd, websiteLd, ...jsonLd];
       />
     </noscript>
 
-    {allJsonLd.map((doc) => (
-      <script is:inline type="application/ld+json" set:html={JSON.stringify(doc)} />
-    ))}
+    {
+      allJsonLd.map((doc) => (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(doc)} />
+      ))
+    }
 
     <slot name="head" />
   </head>

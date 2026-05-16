@@ -2,10 +2,19 @@
 import Heart from './Heart.astro';
 const year = new Date().getFullYear();
 ---
-<footer class="relative bg-cream-dim border-t-[3px] border-ink overflow-hidden">
+
+<footer class="bg-cream-dim border-ink relative overflow-hidden border-t-[3px]">
   <!-- Giant brand wordmark — SVG auto-fits to viewport width -->
-  <div class="px-4 sm:px-6 lg:px-10 pt-12 lg:pt-16 select-none pointer-events-none" aria-hidden="true">
-    <svg viewBox="0 0 600 84" class="w-full h-auto block" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+  <div
+    class="pointer-events-none px-4 pt-12 select-none sm:px-6 lg:px-10 lg:pt-16"
+    aria-hidden="true"
+  >
+    <svg
+      viewBox="0 0 600 84"
+      class="block h-auto w-full"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <text
         x="0"
         y="72"
@@ -17,44 +26,105 @@ const year = new Date().getFullYear();
         fill="none"
         stroke="#0a0a0a"
         stroke-width="1.5"
-        paint-order="stroke"
-      >TIGHTKNIT.DEV</text>
+        paint-order="stroke">TIGHTKNIT.DEV</text
+      >
     </svg>
   </div>
 
-  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-10">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+  <div class="relative mx-auto max-w-7xl px-6 pt-12 pb-10 lg:px-10">
+    <div class="mb-12 grid grid-cols-1 gap-10 md:grid-cols-3">
       <div>
-        <div class="font-mono text-[12px] uppercase tracking-[0.18em] mb-4 text-ink/60">// open source</div>
-        <ul class="space-y-2 font-display text-lg">
-          <li><a href="https://github.com/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">github org →</a></li>
-          <li><a href="#repos" class="hover:text-pink hover:underline decoration-2 underline-offset-4">all repos ↓</a></li>
+        <div class="text-ink/60 mb-4 font-mono text-[12px] tracking-[0.18em] uppercase">
+          // open source
+        </div>
+        <ul class="font-display space-y-2 text-lg">
+          <li>
+            <a
+              href="https://github.com/tightknitai"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-pink decoration-2 underline-offset-4 hover:underline"
+              >github org →</a
+            >
+          </li>
+          <li>
+            <a href="#repos" class="hover:text-pink decoration-2 underline-offset-4 hover:underline"
+              >all repos ↓</a
+            >
+          </li>
         </ul>
       </div>
       <div>
-        <div class="font-mono text-[12px] uppercase tracking-[0.18em] mb-4 text-ink/60">// the company</div>
-        <ul class="space-y-2 font-display text-lg">
-          <li><a href="https://tightknit.ai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">tightknit.ai →</a></li>
-          <li><a href="https://tightknit.ai/blog" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">blog →</a></li>
+        <div class="text-ink/60 mb-4 font-mono text-[12px] tracking-[0.18em] uppercase">
+          // the company
+        </div>
+        <ul class="font-display space-y-2 text-lg">
+          <li>
+            <a
+              href="https://tightknit.ai"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-pink decoration-2 underline-offset-4 hover:underline"
+              >tightknit.ai →</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://tightknit.ai/blog"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-pink decoration-2 underline-offset-4 hover:underline">blog →</a
+            >
+          </li>
         </ul>
       </div>
       <div>
-        <div class="font-mono text-[12px] uppercase tracking-[0.18em] mb-4 text-ink/60">// connect</div>
-        <ul class="space-y-2 font-display text-lg">
-          <li><a href="https://www.linkedin.com/company/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">linkedin →</a></li>
-          <li><a href="https://x.com/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">x / twitter →</a></li>
-          <li><a href="https://github.com/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">github →</a></li>
+        <div class="text-ink/60 mb-4 font-mono text-[12px] tracking-[0.18em] uppercase">
+          // connect
+        </div>
+        <ul class="font-display space-y-2 text-lg">
+          <li>
+            <a
+              href="https://www.linkedin.com/company/tightknitai"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-pink decoration-2 underline-offset-4 hover:underline">linkedin →</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://x.com/tightknitai"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-pink decoration-2 underline-offset-4 hover:underline"
+              >x / twitter →</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/tightknitai"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-pink decoration-2 underline-offset-4 hover:underline">github →</a
+            >
+          </li>
         </ul>
       </div>
     </div>
 
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t-2 border-ink/15 font-mono text-[12px] uppercase tracking-[0.12em] text-ink/60">
-      <div>© {year} tightknit — made with <Heart class="w-3.5 h-3.5 inline-block align-[-3px] mx-0.5" /> in public</div>
+    <div
+      class="border-ink/15 text-ink/60 flex flex-col gap-4 border-t-2 pt-6 font-mono text-[12px] tracking-[0.12em] uppercase sm:flex-row sm:items-center sm:justify-between"
+    >
+      <div>
+        © {year} tightknit — made with <Heart
+          class="mx-0.5 inline-block h-3.5 w-3.5 align-[-3px]"
+        /> in public
+      </div>
       <div class="flex items-center gap-2">
-        <span class="inline-block w-2 h-2 bg-pink"></span>
-        <span class="inline-block w-2 h-2 bg-yellow"></span>
-        <span class="inline-block w-2 h-2 bg-cyan"></span>
-        <span class="inline-block w-2 h-2 bg-ink"></span>
+        <span class="bg-pink inline-block h-2 w-2"></span>
+        <span class="bg-yellow inline-block h-2 w-2"></span>
+        <span class="bg-cyan inline-block h-2 w-2"></span>
+        <span class="bg-ink inline-block h-2 w-2"></span>
       </div>
     </div>
   </div>
