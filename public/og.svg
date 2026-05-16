@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
-      <path d="M 36 0 L 0 0 0 36" fill="none" stroke="#0a0a0a" stroke-opacity="0.08" stroke-width="1"/>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0a0a0a" stroke-opacity="0.08" stroke-width="1"/>
     </pattern>
   </defs>
 
@@ -9,58 +9,44 @@
   <rect width="1200" height="630" fill="#f3ede0"/>
   <rect width="1200" height="630" fill="url(#grid)"/>
 
-  <!-- floating brutalist blocks (right column) -->
-  <g transform="translate(1020 90) rotate(-6)">
-    <rect x="8" y="8" width="100" height="100" fill="#0a0a0a"/>
-    <rect x="0" y="0" width="100" height="100" fill="#00e0ff" stroke="#0a0a0a" stroke-width="4"/>
+  <!-- decor blocks: only two now, clear of all type -->
+  <!-- cyan, top-right -->
+  <g transform="translate(1058 60) rotate(-6)">
+    <rect x="8" y="8" width="86" height="86" fill="#0a0a0a"/>
+    <rect x="0" y="0" width="86" height="86" fill="#00e0ff" stroke="#0a0a0a" stroke-width="4"/>
   </g>
-  <g transform="translate(990 260) rotate(10)">
-    <rect x="8" y="8" width="80" height="80" fill="#0a0a0a"/>
-    <rect x="0" y="0" width="80" height="80" fill="#ffe600" stroke="#0a0a0a" stroke-width="4"/>
-  </g>
-  <g transform="translate(1050 400) rotate(-4)">
-    <rect x="8" y="8" width="70" height="70" fill="#0a0a0a"/>
-    <rect x="0" y="0" width="70" height="70" fill="#ff2d7b" stroke="#0a0a0a" stroke-width="4"/>
+  <!-- yellow, bottom-right, between + AGENTS. and marquee -->
+  <g transform="translate(1058 442) rotate(-5)">
+    <rect x="8" y="8" width="78" height="78" fill="#0a0a0a"/>
+    <rect x="0" y="0" width="78" height="78" fill="#ffe600" stroke="#0a0a0a" stroke-width="4"/>
   </g>
 
   <!-- top row: pixel heart + wordmark -->
-  <g transform="translate(80 70)">
-    <g transform="scale(0.85)">
+  <g transform="translate(60 38)">
+    <g transform="scale(0.72)">
       <polygon points="21,9 33,9 33,27 39,27 39,9 51,9 51,15 57,15 57,21 63,21 63,39 57,39 57,45 51,45 51,51 45,51 45,57 39,57 39,63 33,63 33,57 27,57 27,51 21,51 21,45 15,45 15,39 9,39 9,21 15,21 15,15 21,15" fill="#0a0a0a"/>
       <polygon points="17,5 29,5 29,23 35,23 35,5 47,5 47,11 53,11 53,17 59,17 59,35 53,35 53,41 47,41 47,47 41,47 41,53 35,53 35,59 29,59 29,53 23,53 23,47 17,47 17,41 11,41 11,35 5,35 5,17 11,17 11,11 17,11" fill="#ff2d7b"/>
     </g>
-    <text x="78" y="44" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="700" font-size="34" fill="#0a0a0a" letter-spacing="-1">
+    <text x="64" y="40" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="700" font-size="32" fill="#0a0a0a" letter-spacing="-0.5">
       tightknit<tspan fill="#ff2d7b">.</tspan>dev
     </text>
   </g>
 
-  <!-- status pill -->
-  <g transform="translate(80 130)">
-    <rect x="0" y="0" width="440" height="34" fill="#f3ede0" stroke="#0a0a0a" stroke-width="2"/>
-    <circle cx="18" cy="17" r="5" fill="#ff2d7b"/>
-    <text x="34" y="23" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="500" font-size="12" fill="#0a0a0a" letter-spacing="2">
-      OPEN SOURCE · MAINTAINED IN PUBLIC
-    </text>
+  <!-- big stacked headline -->
+  <g font-family="'Space Grotesk', system-ui, sans-serif" font-weight="700" letter-spacing="-5">
+    <!-- TOOLS (line 1) -->
+    <text x="60" y="248" font-size="138" fill="#0a0a0a">TOOLS</text>
+
+    <!-- FOR (ink) + SLACK (pink with hero-style stacked 3d) -->
+    <text x="60" y="368" font-size="138" fill="#0a0a0a">FOR</text>
+    <!-- SLACK: 2 ink shadows down-right, pink on top -->
+    <text x="368" y="376" font-size="138" fill="#0a0a0a">SLACK</text>
+    <text x="364" y="372" font-size="138" fill="#0a0a0a">SLACK</text>
+    <text x="360" y="368" font-size="138" fill="#ff2d7b">SLACK</text>
+
+    <!-- + AGENTS. (line 3) -->
+    <text x="60" y="488" font-size="138" fill="#0a0a0a">+ AGENTS.</text>
   </g>
-
-  <!-- main headline, stacked like the hero (tight leading) -->
-  <g font-family="'Space Grotesk', system-ui, sans-serif" font-weight="700" letter-spacing="-4">
-    <!-- TOOLS FOR -->
-    <text x="80" y="262" font-size="92" fill="#0a0a0a">TOOLS FOR</text>
-
-    <!-- SLACK with stacked 3d shadow (ink x2 then pink) -->
-    <text x="84" y="372" font-size="116" fill="#0a0a0a">SLACK</text>
-    <text x="82" y="370" font-size="116" fill="#0a0a0a">SLACK</text>
-    <text x="80" y="368" font-size="116" fill="#ff2d7b">SLACK</text>
-
-    <!-- + AGENTS. -->
-    <text x="80" y="478" font-size="92" fill="#0a0a0a">+ AGENTS.</text>
-  </g>
-
-  <!-- subline -->
-  <text x="80" y="528" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="500" font-size="22" fill="#0a0a0a" fill-opacity="0.78">
-    Open source libraries, agents, and developer tools by tightknit.ai.
-  </text>
 
   <!-- bottom marquee strip -->
   <g transform="translate(0 560)">
