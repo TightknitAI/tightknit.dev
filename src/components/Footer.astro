@@ -1,12 +1,25 @@
 ---
+import Heart from './Heart.astro';
 const year = new Date().getFullYear();
 ---
 <footer class="relative bg-cream-dim border-t-[3px] border-ink overflow-hidden">
-  <!-- Giant brand wordmark -->
-  <div class="px-2 pt-12 lg:pt-16 select-none pointer-events-none" aria-hidden="true">
-    <div class="font-display font-bold tracking-[-0.05em] leading-[0.8] text-[clamp(4rem,18vw,14rem)] text-stroke whitespace-nowrap overflow-hidden">
-      TIGHTKNIT.DEV
-    </div>
+  <!-- Giant brand wordmark — SVG auto-fits to viewport width -->
+  <div class="px-4 sm:px-6 lg:px-10 pt-12 lg:pt-16 select-none pointer-events-none" aria-hidden="true">
+    <svg viewBox="0 0 600 84" class="w-full h-auto block" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <text
+        x="0"
+        y="72"
+        font-family="'Space Grotesk', sans-serif"
+        font-weight="700"
+        font-size="84"
+        textLength="600"
+        lengthAdjust="spacingAndGlyphs"
+        fill="none"
+        stroke="#0a0a0a"
+        stroke-width="1.5"
+        paint-order="stroke"
+      >TIGHTKNIT.DEV</text>
+    </svg>
   </div>
 
   <div class="relative max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-10">
@@ -28,6 +41,7 @@ const year = new Date().getFullYear();
       <div>
         <div class="font-mono text-[12px] uppercase tracking-[0.18em] mb-4 text-ink/60">// connect</div>
         <ul class="space-y-2 font-display text-lg">
+          <li><a href="https://www.linkedin.com/company/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">linkedin →</a></li>
           <li><a href="https://x.com/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">x / twitter →</a></li>
           <li><a href="https://github.com/tightknitai" target="_blank" rel="noopener" class="hover:text-pink hover:underline decoration-2 underline-offset-4">github →</a></li>
         </ul>
@@ -35,7 +49,7 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t-2 border-ink/15 font-mono text-[12px] uppercase tracking-[0.12em] text-ink/60">
-      <div>© {year} tightknit — made with <span class="text-pink">●</span> in public</div>
+      <div>© {year} tightknit — made with <Heart class="w-3.5 h-3.5 inline-block align-[-3px] mx-0.5" /> in public</div>
       <div class="flex items-center gap-2">
         <span class="inline-block w-2 h-2 bg-pink"></span>
         <span class="inline-block w-2 h-2 bg-yellow"></span>
