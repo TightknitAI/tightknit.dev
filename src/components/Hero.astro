@@ -4,45 +4,73 @@ interface Props {
 }
 const { repoCount } = Astro.props;
 ---
-<section class="relative overflow-hidden border-b-[3px] border-ink">
-  <div class="absolute inset-0 grid-bg opacity-90 pointer-events-none"></div>
+
+<section class="border-ink relative overflow-hidden border-b-[3px]">
+  <div class="grid-bg pointer-events-none absolute inset-0 opacity-90"></div>
 
   <!-- floating 3d blocks -->
-  <div class="absolute top-12 right-[8%] hidden md:block pointer-events-none" aria-hidden="true">
+  <div class="pointer-events-none absolute top-12 right-[8%] hidden md:block" aria-hidden="true">
     <div class="float-block">
-      <div class="w-24 h-24 bg-pink border-[3px] border-ink" style="box-shadow: 8px 8px 0 var(--color-ink);"></div>
+      <div
+        class="bg-pink border-ink h-24 w-24 border-[3px]"
+        style="box-shadow: 8px 8px 0 var(--color-ink);"
+      >
+      </div>
     </div>
   </div>
-  <div class="absolute bottom-16 right-[22%] hidden lg:block pointer-events-none" aria-hidden="true" style="animation-delay: -2s;">
+  <div
+    class="pointer-events-none absolute right-[22%] bottom-16 hidden lg:block"
+    aria-hidden="true"
+    style="animation-delay: -2s;"
+  >
     <div class="float-block">
-      <div class="w-16 h-16 bg-cyan border-[3px] border-ink" style="box-shadow: 6px 6px 0 var(--color-ink);"></div>
+      <div
+        class="bg-cyan border-ink h-16 w-16 border-[3px]"
+        style="box-shadow: 6px 6px 0 var(--color-ink);"
+      >
+      </div>
     </div>
   </div>
-  <div class="absolute top-32 left-[6%] hidden lg:block pointer-events-none" aria-hidden="true" style="animation-delay: -4s;">
+  <div
+    class="pointer-events-none absolute top-32 left-[6%] hidden lg:block"
+    aria-hidden="true"
+    style="animation-delay: -4s;"
+  >
     <div class="float-block">
-      <div class="w-20 h-20 bg-yellow border-[3px] border-ink rotate-12" style="box-shadow: 6px 6px 0 var(--color-ink);"></div>
+      <div
+        class="bg-yellow border-ink h-20 w-20 rotate-12 border-[3px]"
+        style="box-shadow: 6px 6px 0 var(--color-ink);"
+      >
+      </div>
     </div>
   </div>
 
-  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 lg:pt-24 pb-20 lg:pb-28">
-    <div class="inline-flex items-center gap-3 mb-8">
-      <span class="inline-block w-2.5 h-2.5 bg-pink animate-pulse"></span>
-      <span class="font-mono text-[12px] uppercase tracking-[0.18em] text-ink/70">
+  <div class="relative mx-auto max-w-7xl px-6 pt-16 pb-20 lg:px-10 lg:pt-24 lg:pb-28">
+    <div class="mb-8 inline-flex items-center gap-3">
+      <span class="bg-pink inline-block h-2.5 w-2.5 animate-pulse"></span>
+      <span class="text-ink/70 font-mono text-[12px] tracking-[0.18em] uppercase">
         {repoCount} open source repos · maintained in public
       </span>
     </div>
 
-    <h1 class="font-display font-bold leading-[0.85] tracking-[-0.04em] text-[clamp(3.5rem,12vw,10rem)] mb-2">
+    <h1
+      class="font-display mb-2 text-[clamp(3.5rem,12vw,10rem)] leading-[0.85] font-bold tracking-[-0.04em]"
+    >
       <span class="block">TOOLS</span>
       <span class="block">FOR</span>
-      <span class="block stacked-3d">SLACK</span>
+      <span class="stacked-3d block">SLACK</span>
       <span class="block">+ AGENTS.</span>
     </h1>
 
-    <p class="mt-10 max-w-2xl text-lg lg:text-xl font-medium leading-snug text-ink/85">
+    <p class="text-ink/85 mt-10 max-w-2xl text-lg leading-snug font-medium lg:text-xl">
       Open source libraries, agents, and developer tools shipped by
-      <a href="https://tightknit.ai" target="_blank" rel="noopener" class="underline decoration-pink decoration-[3px] underline-offset-4 hover:text-pink transition-colors">tightknit.ai</a>.
-      Built in TypeScript. Made to be forked.
+      <a
+        href="https://tightknit.ai"
+        target="_blank"
+        rel="noopener"
+        class="decoration-pink hover:text-pink underline decoration-[3px] underline-offset-4 transition-colors"
+        >tightknit.ai</a
+      >. Built in TypeScript. Made to be forked.
     </p>
 
     <div class="mt-10 flex flex-wrap items-center gap-4">
@@ -50,7 +78,12 @@ const { repoCount } = Astro.props;
         <span>browse repos</span>
         <span aria-hidden="true">↓</span>
       </a>
-      <a href="https://github.com/tightknitai" target="_blank" rel="noopener" class="brutal-btn brutal-btn-alt">
+      <a
+        href="https://github.com/tightknitai"
+        target="_blank"
+        rel="noopener"
+        class="brutal-btn brutal-btn-alt"
+      >
         <span>github org</span>
         <span aria-hidden="true">↗</span>
       </a>
@@ -58,22 +91,24 @@ const { repoCount } = Astro.props;
   </div>
 
   <!-- marquee strip -->
-  <div class="bg-ink text-cream border-t-[3px] border-ink overflow-hidden">
-    <div class="marquee py-3 font-mono text-sm uppercase tracking-[0.2em]">
-      {Array.from({ length: 2 }).map(() => (
-        <div class="flex items-center gap-12 px-6 shrink-0">
-          <span>open source</span>
-          <span class="text-yellow">★</span>
-          <span>built in public</span>
-          <span class="text-pink">●</span>
-          <span>typescript-first</span>
-          <span class="text-cyan">◆</span>
-          <span>made by tightknit</span>
-          <span class="text-yellow">★</span>
-          <span>fork it. ship it.</span>
-          <span class="text-pink">●</span>
-        </div>
-      ))}
+  <div class="bg-ink text-cream border-ink overflow-hidden border-t-[3px]">
+    <div class="marquee py-3 font-mono text-sm tracking-[0.2em] uppercase">
+      {
+        Array.from({ length: 2 }).map(() => (
+          <div class="flex shrink-0 items-center gap-12 px-6">
+            <span>open source</span>
+            <span class="text-yellow">★</span>
+            <span>built in public</span>
+            <span class="text-pink">●</span>
+            <span>typescript-first</span>
+            <span class="text-cyan">◆</span>
+            <span>made by tightknit</span>
+            <span class="text-yellow">★</span>
+            <span>fork it. ship it.</span>
+            <span class="text-pink">●</span>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
