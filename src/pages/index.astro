@@ -12,9 +12,39 @@ const { repos, usedFallback } = await loadRepos('tightknitai');
 if (usedFallback) {
   console.warn('[index] using fallback repos — set GITHUB_TOKEN to fetch live data');
 }
+
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'tightknit open source repositories',
+  description:
+    'TypeScript libraries, agents, and developer tools for Slack apps and AI agents, maintained by tightknit.',
+  numberOfItems: repos.length,
+  itemListOrder: 'https://schema.org/ItemListOrderDescending',
+  itemListElement: repos.map((repo, idx) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    item: {
+      '@type': 'SoftwareSourceCode',
+      name: repo.name,
+      identifier: repo.fullName,
+      description: repo.description ?? undefined,
+      codeRepository: repo.url,
+      url: repo.url,
+      programmingLanguage: repo.language ?? undefined,
+      keywords: repo.topics.length > 0 ? repo.topics.join(', ') : undefined,
+      dateModified: repo.pushedAt,
+      author: {
+        '@type': 'Organization',
+        name: 'tightknit',
+        url: 'https://tightknit.ai',
+      },
+    },
+  })),
+};
 ---
 
-<Layout>
+<Layout jsonLd={[itemListLd]}>
   <Nav />
   <main>
     <Hero repoCount={repos.length} />

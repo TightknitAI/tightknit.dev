@@ -32,6 +32,46 @@ interface GitHubRepoApi {
 
 const GITHUB_API = 'https://api.github.com';
 
+const TOPIC_PRIORITY: readonly string[] = [
+  'slack',
+  'slack-block-kit',
+  'block-kit',
+  'slack-framework',
+  'template',
+  'storybook-addon',
+  'validator',
+  'validation',
+  'block-kit-builder',
+  'wysiwyg',
+  'visual-builder',
+  'landing-page',
+  'drag-and-drop',
+  'react',
+  'hono',
+  'storybook',
+  'astro',
+  'tailwindcss',
+  'json-schema',
+  'vite',
+  'mdx',
+  'ajv',
+  'cloudflare-workers',
+  'nodejs',
+  'slack-edge',
+  'typescript',
+];
+
+function sortTopics(topics: readonly string[]): string[] {
+  return [...topics].sort((a, b) => {
+    const aIdx = TOPIC_PRIORITY.indexOf(a);
+    const bIdx = TOPIC_PRIORITY.indexOf(b);
+    if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
+    if (aIdx !== -1) return -1;
+    if (bIdx !== -1) return 1;
+    return a.localeCompare(b);
+  });
+}
+
 export async function getOrgRepos(org: string): Promise<Repo[]> {
   const token = import.meta.env.GITHUB_TOKEN ?? process.env.GITHUB_TOKEN;
   const headers: Record<string, string> = {
@@ -71,7 +111,7 @@ export async function getOrgRepos(org: string): Promise<Repo[]> {
         stars: r.stargazers_count,
         forks: r.forks_count,
         language: r.language,
-        topics: r.topics ?? [],
+        topics: sortTopics(r.topics ?? []),
         pushedAt: r.pushed_at,
         archived: r.archived,
         fork: r.fork,
@@ -125,14 +165,43 @@ const FALLBACK_REPOS: Repo[] = [
   },
 ];
 
+const EXCLUDED_REPOS = new Set(['tightknit-tdx-demo', 'homebrew-tap']);
+
+// Repos to surface even when the GitHub org doesn't expose them (yet).
+// If the live API later returns one of these, the live entry wins.
+const MANUAL_REPOS: Repo[] = [
+  {
+    name: 'slack-hono-template',
+    fullName: 'tightknitai/slack-hono-template',
+    description: 'Starter template for shipping a Slack app with slack-hono on Cloudflare Workers.',
+    url: 'https://github.com/tightknitai/slack-hono-template',
+    homepage: null,
+    stars: 0,
+    forks: 0,
+    language: 'TypeScript',
+    topics: ['slack', 'hono', 'cloudflare-workers', 'template'],
+    pushedAt: new Date().toISOString(),
+    archived: false,
+    fork: false,
+  },
+];
+
+function mergeManual(live: Repo[]): Repo[] {
+  const liveNames = new Set(live.map((r) => r.name));
+  const additions = MANUAL_REPOS.filter((r) => !liveNames.has(r.name));
+  return [...live, ...additions]
+    .map((r) => ({ ...r, topics: sortTopics(r.topics) }))
+    .sort((a, b) => b.stars - a.stars || a.name.localeCompare(b.name));
+}
+
 export async function loadRepos(org: string): Promise<{ repos: Repo[]; usedFallback: boolean }> {
   try {
-    const repos = await getOrgRepos(org);
-    if (repos.length === 0) return { repos: FALLBACK_REPOS, usedFallback: true };
-    return { repos, usedFallback: false };
+    const live = (await getOrgRepos(org)).filter((r) => !EXCLUDED_REPOS.has(r.name));
+    if (live.length === 0) return { repos: mergeManual(FALLBACK_REPOS), usedFallback: true };
+    return { repos: mergeManual(live), usedFallback: false };
   } catch (err) {
     console.warn(`[github] failed to fetch ${org} repos, using fallback:`, err);
-    return { repos: FALLBACK_REPOS, usedFallback: true };
+    return { repos: mergeManual(FALLBACK_REPOS), usedFallback: true };
   }
 }
 
