@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "tightknit-dev",
-  "account_id": "01253e2e7d2d382a52411a068a45425b",
+  "account_id": "8d7bf1b1223e55c7da39da42e2521163",
   "compatibility_date": "2026-01-01",
   "assets": {
     "directory": "./dist",
