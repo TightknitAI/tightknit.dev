@@ -75,13 +75,13 @@
   .stacked-3d {
     color: var(--color-pink);
     text-shadow:
-      4px 4px 0 var(--color-ink),
-      8px 8px 0 var(--color-ink);
+      4px 4px 0 var(--color-yellow),
+      8px 8px 0 var(--color-cyan),
+      12px 12px 0 var(--color-ink);
   }
 
   .marquee {
     display: flex;
-    gap: 3rem;
     animation: marquee 30s linear infinite;
     white-space: nowrap;
     width: max-content;

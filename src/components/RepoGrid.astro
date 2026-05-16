@@ -8,7 +8,7 @@ interface Props {
 const { repos } = Astro.props;
 
 // Hand-pick the headline projects; remaining repos sort by stars (already sorted upstream).
-const FEATURED_NAMES = ['block-kitchen', 'slack-block-kit-validator', 'slack-hono'];
+const FEATURED_NAMES = ['block-kitchen', 'slack-hono', 'slack-block-kit-validator'];
 const featured = FEATURED_NAMES.map((name) => repos.find((r) => r.name === name)).filter(
   (r): r is Repo => r !== undefined,
 );
@@ -32,12 +32,13 @@ const featuredVariants = ['yellow', 'pink', 'cyan'] as const;
         </h2>
       </div>
       <p class="text-ink/70 max-w-md font-mono text-sm leading-relaxed">
-        Auto-synced from <a
+        Block Kit tooling, app frameworks, and validators we use to ship Slack apps faster. Open
+        sourced on <a
           href="https://github.com/tightknitai"
           class="decoration-pink hover:text-pink underline decoration-2 underline-offset-2"
           target="_blank"
           rel="noopener">github.com/tightknitai</a
-        > at build time. Sorted by stars.
+        >.
       </p>
     </div>
 
