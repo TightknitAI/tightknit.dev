@@ -125,14 +125,41 @@ const FALLBACK_REPOS: Repo[] = [
   },
 ];
 
+const EXCLUDED_REPOS = new Set(['tightknit-tdx-demo', 'homebrew-tap']);
+
+// Repos to surface even when the GitHub org doesn't expose them (yet).
+// If the live API later returns one of these, the live entry wins.
+const MANUAL_REPOS: Repo[] = [
+  {
+    name: 'slack-hono-template',
+    fullName: 'tightknitai/slack-hono-template',
+    description: 'Starter template for shipping a Slack app with slack-hono on Cloudflare Workers.',
+    url: 'https://github.com/tightknitai/slack-hono-template',
+    homepage: null,
+    stars: 0,
+    forks: 0,
+    language: 'TypeScript',
+    topics: ['slack', 'hono', 'cloudflare-workers', 'template'],
+    pushedAt: new Date().toISOString(),
+    archived: false,
+    fork: false,
+  },
+];
+
+function mergeManual(live: Repo[]): Repo[] {
+  const liveNames = new Set(live.map((r) => r.name));
+  const additions = MANUAL_REPOS.filter((r) => !liveNames.has(r.name));
+  return [...live, ...additions].sort((a, b) => b.stars - a.stars || a.name.localeCompare(b.name));
+}
+
 export async function loadRepos(org: string): Promise<{ repos: Repo[]; usedFallback: boolean }> {
   try {
-    const repos = await getOrgRepos(org);
-    if (repos.length === 0) return { repos: FALLBACK_REPOS, usedFallback: true };
-    return { repos, usedFallback: false };
+    const live = (await getOrgRepos(org)).filter((r) => !EXCLUDED_REPOS.has(r.name));
+    if (live.length === 0) return { repos: mergeManual(FALLBACK_REPOS), usedFallback: true };
+    return { repos: mergeManual(live), usedFallback: false };
   } catch (err) {
     console.warn(`[github] failed to fetch ${org} repos, using fallback:`, err);
-    return { repos: FALLBACK_REPOS, usedFallback: true };
+    return { repos: mergeManual(FALLBACK_REPOS), usedFallback: true };
   }
 }
 
