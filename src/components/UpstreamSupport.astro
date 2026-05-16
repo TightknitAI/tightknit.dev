@@ -1,0 +1,82 @@
+---
+const upstreamRepos = [
+  {
+    name: 'slack-edge',
+    description:
+      'Slack app framework for TypeScript edge runtimes — Cloudflare Workers, Deno, Vercel.',
+    url: 'https://github.com/seratch/slack-edge',
+  },
+  {
+    name: 'slack-cloudflare-workers',
+    description: 'Slack app framework purpose-built for Cloudflare Workers.',
+    url: 'https://github.com/seratch/slack-cloudflare-workers',
+  },
+  {
+    name: 'slack-web-api-client',
+    description: 'TypeScript Slack Web API client tuned for edge runtimes.',
+    url: 'https://github.com/seratch/slack-web-api-client',
+  },
+];
+---
+
+<section id="upstream" class="bg-cream-dim border-ink relative border-b-[3px]">
+  <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+    <div class="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <div class="text-ink/60 mb-3 font-mono text-[12px] tracking-[0.18em] uppercase">
+          // upstream
+        </div>
+        <h2
+          class="font-display text-3xl leading-[0.95] font-bold tracking-[-0.03em] sm:text-4xl lg:text-5xl"
+        >
+          Standing on shoulders.
+        </h2>
+      </div>
+      <p class="text-ink/70 max-w-md font-mono text-sm leading-relaxed">
+        The TypeScript Slack stack we build on and ship contributions to. Originally by <a
+          href="https://github.com/seratch"
+          target="_blank"
+          rel="noopener"
+          class="decoration-pink hover:text-pink underline decoration-2 underline-offset-2"
+          >Kazuhiro Sera (@seratch)</a
+        >.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {
+        upstreamRepos.map((repo) => (
+          <a
+            href={repo.url}
+            target="_blank"
+            rel="noopener"
+            class="brutal-card group block p-5 focus:outline-none focus-visible:translate-x-[-3px] focus-visible:translate-y-[-3px] lg:p-6"
+          >
+            <div class="mb-4 flex items-start justify-between gap-3">
+              <div class="font-mono text-[11px] tracking-[0.16em] uppercase opacity-80">
+                seratch / <span class="font-semibold opacity-100">{repo.name}</span>
+              </div>
+              <span
+                class="font-mono text-[16px] leading-none transition-transform group-hover:scale-110 group-hover:rotate-[12deg]"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+            </div>
+
+            <h3 class="font-display mb-3 text-xl leading-[0.95] font-bold tracking-[-0.03em] sm:text-2xl">
+              {repo.name}
+            </h3>
+
+            <p class="text-ink/80 mb-5 text-[14px] leading-snug">{repo.description}</p>
+
+            <div class="border-ink/15 flex items-center gap-2 border-t-2 pt-3 font-mono text-[11px] tracking-[0.08em] uppercase">
+              <span class="bg-pink inline-block h-2 w-2" aria-hidden="true" />
+              <span class="opacity-80">contributor</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
