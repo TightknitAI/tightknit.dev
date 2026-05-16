@@ -42,7 +42,9 @@
     color: var(--color-yellow);
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     border-radius: 0;
   }
 
@@ -73,21 +75,25 @@
   .stacked-3d {
     color: var(--color-pink);
     text-shadow:
-      4px 4px 0 var(--color-ink),
-      8px 8px 0 var(--color-ink);
+      4px 4px 0 var(--color-yellow),
+      8px 8px 0 var(--color-cyan),
+      12px 12px 0 var(--color-ink);
   }
 
   .marquee {
     display: flex;
-    gap: 3rem;
     animation: marquee 30s linear infinite;
     white-space: nowrap;
     width: max-content;
   }
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   .float-block {
@@ -95,15 +101,22 @@
   }
 
   @keyframes float-block {
-    0%, 100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-12px) rotate(2deg); }
+    0%,
+    100% {
+      transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+      transform: translateY(-12px) rotate(2deg);
+    }
   }
 
   .brutal-card {
     background: #ffffff;
     border: 3px solid var(--color-ink);
     box-shadow: var(--shadow-brutal);
-    transition: transform 120ms ease, box-shadow 120ms ease;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease;
   }
 
   .brutal-card:hover {
@@ -151,7 +164,10 @@
     font-size: 0.875rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease,
+      background 120ms ease;
   }
 
   .brutal-btn:hover {
@@ -181,5 +197,29 @@
     background: var(--color-cream);
     color: var(--color-ink);
     text-transform: lowercase;
+  }
+
+  .event-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.45rem 0.85rem;
+    background: var(--color-yellow);
+    border: 2.5px solid var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-ink);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease;
+  }
+
+  .event-pill:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-ink);
   }
 }

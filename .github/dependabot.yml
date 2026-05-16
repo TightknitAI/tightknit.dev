@@ -1,36 +1,36 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/"
+    directory: '/'
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
     groups:
       astro:
         patterns:
-          - "astro"
-          - "@astrojs/*"
+          - 'astro'
+          - '@astrojs/*'
       tailwind:
         patterns:
-          - "tailwindcss"
-          - "@tailwindcss/*"
+          - 'tailwindcss'
+          - '@tailwindcss/*'
       cloudflare:
         patterns:
-          - "wrangler"
-          - "@cloudflare/*"
+          - 'wrangler'
+          - '@cloudflare/*'
       types:
         patterns:
-          - "@types/*"
+          - '@types/*'
       minor-and-patch:
         update-types:
           - minor
           - patch
 
   - package-ecosystem: github-actions
-    directory: "/"
+    directory: '/'
     schedule:
       interval: weekly
     groups:
       actions:
         patterns:
-          - "*"
+          - '*'

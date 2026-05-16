@@ -3,7 +3,7 @@ const items = [
   {
     n: '01',
     title: 'Made to be forked.',
-    body: 'Every repo is MIT (or compatible). Lift it, mod it, ship it. The point is that you don\'t have to ask.',
+    body: "Every repo is MIT (or compatible). Lift it, mod it, ship it. The point is that you don't have to ask.",
   },
   {
     n: '02',
@@ -12,32 +12,41 @@ const items = [
   },
   {
     n: '03',
-    title: 'Built in public.',
-    body: 'Roadmaps in GitHub issues, releases on a real changelog, and the maintainers actually read PRs.',
+    title: 'From the Tightknit team.',
+    body: 'Built by the team behind Tightknit, the #1 community platform on Slack. These are the libraries and patterns we reach for when shipping Slack apps, open sourced for yours.',
   },
 ];
 ---
-<section class="relative bg-ink text-cream border-b-[3px] border-ink overflow-hidden">
-  <div class="absolute inset-0 dotted-bg opacity-30 pointer-events-none" style="background-image: radial-gradient(rgba(243,237,224,0.18) 1.5px, transparent 1.5px); background-size: 22px 22px;"></div>
 
-  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
-    <div class="flex items-center gap-4 mb-12">
-      <span class="font-mono text-[12px] uppercase tracking-[0.18em] text-yellow">// principles</span>
-      <div class="h-[2px] bg-yellow/40 flex-1"></div>
+<section class="bg-ink text-cream border-ink relative overflow-hidden border-b-[3px]">
+  <div
+    class="dotted-bg pointer-events-none absolute inset-0 opacity-30"
+    style="background-image: radial-gradient(rgba(243,237,224,0.18) 1.5px, transparent 1.5px); background-size: 22px 22px;"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+    <div class="mb-12 flex items-center gap-4">
+      <span class="text-yellow font-mono text-[12px] tracking-[0.18em] uppercase"
+        >// principles</span
+      >
+      <div class="bg-yellow/40 h-[2px] flex-1"></div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12">
-      {items.map((item) => (
-        <div class="border-t-[3px] border-cream/90 pt-6">
-          <div class="font-mono text-[12px] uppercase tracking-[0.18em] text-yellow mb-4">{item.n}</div>
-          <h3 class="font-display font-bold text-3xl lg:text-4xl tracking-[-0.03em] leading-[0.95] mb-4">
-            {item.title}
-          </h3>
-          <p class="text-[15px] lg:text-base leading-relaxed text-cream/80">
-            {item.body}
-          </p>
-        </div>
-      ))}
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-12">
+      {
+        items.map((item) => (
+          <div class="border-cream/90 border-t-[3px] pt-6">
+            <div class="text-yellow mb-4 font-mono text-[12px] tracking-[0.18em] uppercase">
+              {item.n}
+            </div>
+            <h3 class="font-display mb-4 text-3xl leading-[0.95] font-bold tracking-[-0.03em] lg:text-4xl">
+              {item.title}
+            </h3>
+            <p class="text-cream/80 text-[15px] leading-relaxed lg:text-base">{item.body}</p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

@@ -8,54 +8,67 @@ interface Props {
 const { repos } = Astro.props;
 
 // Hand-pick the headline projects; remaining repos sort by stars (already sorted upstream).
-const FEATURED_NAMES = ['block-kitchen', 'slack-block-kit-validator', 'slack-hono'];
-const featured = FEATURED_NAMES
-  .map((name) => repos.find((r) => r.name === name))
-  .filter((r): r is Repo => r !== undefined);
+const FEATURED_NAMES = ['block-kitchen', 'slack-hono', 'slack-block-kit-validator'];
+const featured = FEATURED_NAMES.map((name) => repos.find((r) => r.name === name)).filter(
+  (r): r is Repo => r !== undefined,
+);
 const featuredSet = new Set(featured.map((r) => r.name));
 const rest = repos.filter((r) => !featuredSet.has(r.name));
 
 const featuredVariants = ['yellow', 'pink', 'cyan'] as const;
 ---
-<section id="repos" class="relative bg-cream border-b-[3px] border-ink">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
-    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 lg:mb-16">
+
+<section id="repos" class="bg-cream border-ink relative border-b-[3px]">
+  <div class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+    <div class="mb-12 flex flex-col gap-6 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <div class="font-mono text-[12px] uppercase tracking-[0.18em] mb-3 text-ink/60">
+        <div class="text-ink/60 mb-3 font-mono text-[12px] tracking-[0.18em] uppercase">
           // featured
         </div>
-        <h2 class="font-display font-bold text-5xl sm:text-6xl lg:text-7xl tracking-[-0.04em] leading-[0.9]">
+        <h2
+          class="font-display text-5xl leading-[0.9] font-bold tracking-[-0.04em] sm:text-6xl lg:text-7xl"
+        >
           The Stack.
         </h2>
       </div>
-      <p class="font-mono text-sm leading-relaxed max-w-md text-ink/70">
-        Auto-synced from <a href="https://github.com/tightknitai" class="underline decoration-pink decoration-2 underline-offset-2 hover:text-pink" target="_blank" rel="noopener">github.com/tightknitai</a> at build time. Sorted by stars.
+      <p class="text-ink/70 max-w-md font-mono text-sm leading-relaxed">
+        Block Kit tooling, app frameworks, and validators we use to ship Slack apps faster. Open
+        sourced on <a
+          href="https://github.com/tightknitai"
+          class="decoration-pink hover:text-pink underline decoration-2 underline-offset-2"
+          target="_blank"
+          rel="noopener">github.com/tightknitai</a
+        >.
       </p>
     </div>
 
-    {featured.length > 0 && (
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 mb-16 lg:mb-20">
-        {featured.map((repo, i) => (
-          <RepoCard repo={repo} variant={featuredVariants[i]!} featured />
-        ))}
-      </div>
-    )}
-
-    {rest.length > 0 && (
-      <>
-        <div class="flex items-center gap-4 mb-8">
-          <div class="font-mono text-[12px] uppercase tracking-[0.18em] text-ink/60 shrink-0">
-            // the rest
-          </div>
-          <div class="h-[2px] bg-ink/15 flex-1"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rest.map((repo) => (
-            <RepoCard repo={repo} variant="default" />
+    {
+      featured.length > 0 && (
+        <div class="mb-16 grid grid-cols-1 gap-7 lg:mb-20 lg:grid-cols-3">
+          {featured.map((repo, i) => (
+            <RepoCard repo={repo} variant={featuredVariants[i]!} featured />
           ))}
         </div>
-      </>
-    )}
+      )
+    }
+
+    {
+      rest.length > 0 && (
+        <>
+          <div class="mb-8 flex items-center gap-4">
+            <div class="text-ink/60 shrink-0 font-mono text-[12px] tracking-[0.18em] uppercase">
+              // the rest
+            </div>
+            <div class="bg-ink/15 h-[2px] flex-1" />
+          </div>
+
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {rest.map((repo) => (
+              <RepoCard repo={repo} variant="default" />
+            ))}
+          </div>
+        </>
+      )
+    }
   </div>
 </section>

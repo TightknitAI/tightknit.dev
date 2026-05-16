@@ -7,6 +7,7 @@ export interface Repo {
   stars: number;
   forks: number;
   language: string | null;
+  license: string | null;
   topics: string[];
   pushedAt: string;
   archived: boolean;
@@ -22,6 +23,7 @@ interface GitHubRepoApi {
   stargazers_count: number;
   forks_count: number;
   language: string | null;
+  license: { spdx_id: string | null; name: string | null } | null;
   topics: string[];
   pushed_at: string;
   archived: boolean;
@@ -105,12 +107,14 @@ export async function getOrgRepos(org: string): Promise<Repo[]> {
       (r): Repo => ({
         name: r.name,
         fullName: r.full_name,
-        description: r.description,
+        description: r.description ? r.description.replace(/\s*—\s*/g, ', ') : null,
         url: r.html_url,
         homepage: r.homepage,
         stars: r.stargazers_count,
         forks: r.forks_count,
         language: r.language,
+        license:
+          r.license?.spdx_id && r.license.spdx_id !== 'NOASSERTION' ? r.license.spdx_id : null,
         topics: sortTopics(r.topics ?? []),
         pushedAt: r.pushed_at,
         archived: r.archived,
@@ -130,6 +134,7 @@ const FALLBACK_REPOS: Repo[] = [
     stars: 0,
     forks: 0,
     language: 'TypeScript',
+    license: 'MIT',
     topics: ['slack', 'block-kit'],
     pushedAt: new Date().toISOString(),
     archived: false,
@@ -144,6 +149,7 @@ const FALLBACK_REPOS: Repo[] = [
     stars: 0,
     forks: 0,
     language: 'TypeScript',
+    license: 'MIT',
     topics: ['slack', 'block-kit', 'validation'],
     pushedAt: new Date().toISOString(),
     archived: false,
@@ -152,12 +158,13 @@ const FALLBACK_REPOS: Repo[] = [
   {
     name: 'slack-hono',
     fullName: 'tightknitai/slack-hono',
-    description: 'Build Slack apps on Hono — works on Workers, Bun, Node.',
+    description: 'Build Slack apps on Hono. Works on Workers, Bun, Node.',
     url: 'https://github.com/tightknitai/slack-hono',
     homepage: null,
     stars: 0,
     forks: 0,
     language: 'TypeScript',
+    license: 'MIT',
     topics: ['slack', 'hono', 'cloudflare-workers'],
     pushedAt: new Date().toISOString(),
     archived: false,
@@ -179,6 +186,7 @@ const MANUAL_REPOS: Repo[] = [
     stars: 0,
     forks: 0,
     language: 'TypeScript',
+    license: 'MIT',
     topics: ['slack', 'hono', 'cloudflare-workers', 'template'],
     pushedAt: new Date().toISOString(),
     archived: false,
