@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import RepoGrid from '../components/RepoGrid.astro';
+import UpstreamSupport from '../components/UpstreamSupport.astro';
 import Manifesto from '../components/Manifesto.astro';
 import Footer from '../components/Footer.astro';
 import { loadRepos } from '../lib/github';
@@ -49,6 +50,7 @@ const itemListLd = {
   <main>
     <Hero />
     <RepoGrid repos={repos} />
+    <UpstreamSupport />
     <Manifesto />
   </main>
   <Footer />
