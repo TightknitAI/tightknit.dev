@@ -1,0 +1,24 @@
+# tightknit.dev
+
+> Open source tools for building Slack apps, agents, and community products. From the team at tightknit.ai. Built in TypeScript. Made to be forked.
+
+tightknit.dev is the landing page for tightknit's open source repos. The repo grid is auto-synced from the [tightknitai GitHub org](https://github.com/tightknitai) at build time. Every project is MIT (or compatible), TypeScript-first, and targets Node, Bun, and Cloudflare Workers.
+
+## Featured repos
+
+- [block-kitchen](https://github.com/tightknitai/block-kitchen): Compose Slack Block Kit messages with a React-style API.
+- [slack-block-kit-validator](https://github.com/tightknitai/slack-block-kit-validator): Validate Slack Block Kit payloads before you send them.
+- [slack-hono](https://github.com/tightknitai/slack-hono): Build Slack apps on Hono — works on Workers, Bun, Node.
+- [slack-hono-template](https://github.com/tightknitai/slack-hono-template): Starter template for shipping a Slack app with slack-hono on Cloudflare Workers.
+
+## Principles
+
+- **Made to be forked.** Every repo is MIT (or compatible). Lift it, mod it, ship it.
+- **TypeScript first.** Strict mode on, types as docs, end-to-end inference where possible. Runtimes: Node, Bun, Cloudflare Workers.
+- **Built in public.** Roadmaps in GitHub issues, releases on a real changelog, maintainers read PRs.
+
+## Links
+
+- [GitHub org (tightknitai)](https://github.com/tightknitai): Source of truth for all open source repos.
+- [tightknit.ai](https://tightknit.ai): The company behind these tools — community platform for developer-facing teams.
+- [tightknit.dev source](https://github.com/TightknitAI/tightknit.dev): Source code for this landing page (Astro 5, Tailwind v4, Cloudflare Workers).
