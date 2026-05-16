@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tightknit-dev",
+  "name": "tightknit-dev-website",
   "compatibility_date": "2026-01-01",
   "assets": {
     "directory": "./dist",
