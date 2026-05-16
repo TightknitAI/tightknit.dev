@@ -10,7 +10,7 @@ import { loadRepos } from '../lib/github';
 const { repos, usedFallback } = await loadRepos('tightknitai');
 
 if (usedFallback) {
-  console.warn('[index] using fallback repos — set GITHUB_TOKEN to fetch live data');
+  console.warn('[index] using fallback repos. Set GITHUB_TOKEN to fetch live data');
 }
 
 const itemListLd = {
@@ -47,7 +47,7 @@ const itemListLd = {
 <Layout jsonLd={[itemListLd]}>
   <Nav />
   <main>
-    <Hero repoCount={repos.length} />
+    <Hero />
     <RepoGrid repos={repos} />
     <Manifesto />
   </main>
