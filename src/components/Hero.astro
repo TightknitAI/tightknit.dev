@@ -1,5 +1,10 @@
 ---
+// Hide the event pill once the date passes (build-time check).
+// To re-use this pattern: add a new entry, point Hero at it.
+const SLACK_DEV_DAY_HIDE_AFTER = new Date('2026-05-21T00:00:00Z');
+const showSlackDevDay = new Date() < SLACK_DEV_DAY_HIDE_AFTER;
 
+const QUICK_START_CMD = 'npx degit tightknitai/slack-hono-template my-slack-app';
 ---
 
 <section class="border-ink relative overflow-hidden border-b-[3px]">
@@ -7,7 +12,7 @@
 
   <!-- floating 3d blocks -->
   <div class="pointer-events-none absolute top-12 right-[8%] hidden md:block" aria-hidden="true">
-    <div class="float-block">
+    <div class="float-block float-block-a">
       <div
         class="bg-pink border-ink h-24 w-24 border-[3px]"
         style="box-shadow: 8px 8px 0 var(--color-ink);"
@@ -18,9 +23,8 @@
   <div
     class="pointer-events-none absolute right-[22%] bottom-16 hidden lg:block"
     aria-hidden="true"
-    style="animation-delay: -2s;"
   >
-    <div class="float-block">
+    <div class="float-block float-block-b">
       <div
         class="bg-cyan border-ink h-16 w-16 border-[3px]"
         style="box-shadow: 6px 6px 0 var(--color-ink);"
@@ -28,14 +32,10 @@
       </div>
     </div>
   </div>
-  <div
-    class="pointer-events-none absolute top-32 left-[6%] hidden lg:block"
-    aria-hidden="true"
-    style="animation-delay: -4s;"
-  >
-    <div class="float-block">
+  <div class="pointer-events-none absolute top-32 left-[6%] hidden lg:block" aria-hidden="true">
+    <div class="float-block float-block-c">
       <div
-        class="bg-yellow border-ink h-20 w-20 rotate-12 border-[3px]"
+        class="bg-yellow border-ink h-20 w-20 border-[3px]"
         style="box-shadow: 6px 6px 0 var(--color-ink);"
       >
       </div>
@@ -43,21 +43,32 @@
   </div>
 
   <div class="relative mx-auto max-w-7xl px-6 pt-16 pb-20 lg:px-10 lg:pt-24 lg:pb-28">
-    <div class="mb-5">
-      <a href="https://slack.dev/slack-dev-day/" target="_blank" rel="noopener" class="event-pill">
-        <svg
-          viewBox="0 0 16 14"
-          class="text-pink h-4 w-4 shrink-0 animate-pulse"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path d="M0 5 H2 L9 1 V13 L2 9 H0 Z"></path>
-          <path d="M11 4 H12 V10 H11 Z"></path>
-          <path d="M14 5 H15 V9 H14 Z"></path>
-        </svg>
-        <span>See you at Slack Dev Day · May&nbsp;20&nbsp;<span aria-hidden="true">↗</span></span>
-      </a>
-    </div>
+    {
+      showSlackDevDay && (
+        <div class="mb-5">
+          <a
+            href="https://slack.dev/slack-dev-day/"
+            target="_blank"
+            rel="noopener"
+            class="event-pill"
+          >
+            <svg
+              viewBox="0 0 16 14"
+              class="text-pink h-4 w-4 shrink-0 animate-pulse"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M0 5 H2 L9 1 V13 L2 9 H0 Z" />
+              <path d="M11 4 H12 V10 H11 Z" />
+              <path d="M14 5 H15 V9 H14 Z" />
+            </svg>
+            <span>
+              See you at Slack Dev Day · May&nbsp;20&nbsp;<span aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </div>
+      )
+    }
 
     <div class="mb-8 inline-flex items-center gap-3">
       <span class="bg-pink inline-block h-2.5 w-2.5 animate-pulse"></span>
@@ -101,6 +112,29 @@
         <span aria-hidden="true">↗</span>
       </a>
     </div>
+
+    <div class="mt-10 max-w-2xl">
+      <div class="text-ink/60 mb-2 font-mono text-[11px] tracking-[0.18em] uppercase">
+        // ship a slack app in 60 seconds
+      </div>
+      <div
+        class="brutal-snippet group"
+        role="group"
+        aria-label={`Quick-start command: ${QUICK_START_CMD}`}
+      >
+        <span class="snippet-prompt" aria-hidden="true">$</span>
+        <code class="snippet-cmd">{QUICK_START_CMD}</code>
+        <button
+          type="button"
+          class="snippet-copy"
+          data-copy={QUICK_START_CMD}
+          aria-label="copy command"
+        >
+          <span class="snippet-copy-default" aria-hidden="true">copy</span>
+          <span class="snippet-copy-ok" aria-hidden="true">copied ✓</span>
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- marquee strip -->
@@ -125,3 +159,32 @@
     </div>
   </div>
 </section>
+
+<script>
+  // Copy-to-clipboard for the quick-start snippet (and any future data-copy buttons).
+  document.querySelectorAll<HTMLButtonElement>('button[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy;
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        // Clipboard API unavailable (insecure context, permissions). Fall back to a hidden textarea.
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+        } catch {
+          /* ignore */
+        }
+        ta.remove();
+      }
+      btn.classList.add('is-copied');
+      window.setTimeout(() => btn.classList.remove('is-copied'), 1500);
+    });
+  });
+</script>

@@ -1,3 +1,7 @@
+/* Self-hosted variable fonts. Replaces the Google Fonts <link> in Layout.astro. */
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/jetbrains-mono';
+
 @import 'tailwindcss';
 
 @theme {
@@ -10,9 +14,9 @@
   --color-cyan: #00e0ff;
   --color-lime: #c8ff3a;
 
-  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 
   --radius-none: 0;
   --shadow-brutal: 8px 8px 0 #0a0a0a;
@@ -96,17 +100,44 @@
     }
   }
 
-  .float-block {
-    animation: float-block 6s ease-in-out infinite;
+  /* Three float variants — different durations + rotation ranges so the blocks don't bob in sync.
+     Note: animation-delay on the parent wrapper was previously a no-op (animations live here on
+     .float-block-*, not the wrapper); these negative delays put each block at a different phase. */
+  .float-block-a {
+    animation: float-block-a 6s ease-in-out infinite;
+  }
+  .float-block-b {
+    animation: float-block-b 6.8s ease-in-out -1.5s infinite;
+  }
+  .float-block-c {
+    animation: float-block-c 7.4s ease-in-out -3s infinite;
   }
 
-  @keyframes float-block {
+  @keyframes float-block-a {
     0%,
     100% {
-      transform: translateY(0) rotate(-2deg);
+      transform: translateY(0) rotate(-3deg);
     }
     50% {
       transform: translateY(-12px) rotate(2deg);
+    }
+  }
+  @keyframes float-block-b {
+    0%,
+    100% {
+      transform: translateY(0) rotate(5deg);
+    }
+    50% {
+      transform: translateY(-9px) rotate(-4deg);
+    }
+  }
+  @keyframes float-block-c {
+    0%,
+    100% {
+      transform: translateY(0) rotate(8deg);
+    }
+    50% {
+      transform: translateY(-14px) rotate(16deg);
     }
   }
 
@@ -221,5 +252,95 @@
   .event-pill:hover {
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 var(--color-ink);
+  }
+
+  .brutal-snippet {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.85rem 0.85rem 0.85rem 1rem;
+    background: var(--color-ink);
+    color: var(--color-cream);
+    border: 3px solid var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-pink);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1;
+    max-width: 100%;
+    overflow-x: auto;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease;
+  }
+
+  .brutal-snippet:hover,
+  .brutal-snippet:focus-within {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-pink);
+  }
+
+  .snippet-prompt {
+    color: var(--color-pink);
+    user-select: none;
+    font-weight: 600;
+  }
+
+  .snippet-cmd {
+    color: var(--color-cream);
+    white-space: nowrap;
+  }
+
+  .snippet-copy {
+    margin-left: auto;
+    padding: 0.3rem 0.65rem;
+    background: var(--color-yellow);
+    color: var(--color-ink);
+    border: 2px solid var(--color-cream);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      background 120ms ease,
+      color 120ms ease,
+      border-color 120ms ease;
+  }
+
+  .snippet-copy:hover,
+  .snippet-copy:focus-visible {
+    background: var(--color-pink);
+    color: var(--color-cream);
+    outline: none;
+  }
+
+  .snippet-copy-ok {
+    display: none;
+  }
+
+  .snippet-copy.is-copied {
+    background: var(--color-cyan);
+    color: var(--color-ink);
+  }
+
+  .snippet-copy.is-copied .snippet-copy-default {
+    display: none;
+  }
+
+  .snippet-copy.is-copied .snippet-copy-ok {
+    display: inline;
+  }
+}
+
+/* Honor user motion preferences. Decorative animations stop; functional transitions soften. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }
