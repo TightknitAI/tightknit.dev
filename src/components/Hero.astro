@@ -4,6 +4,7 @@
 const SLACK_DEV_DAY_HIDE_AFTER = new Date('2026-05-21T00:00:00Z');
 const showSlackDevDay = new Date() < SLACK_DEV_DAY_HIDE_AFTER;
 
+// Must be a PUBLIC GitHub repo — degit downloads anonymous tarballs and 404s on private repos.
 const QUICK_START_CMD = 'npx degit tightknitai/slack-hono-template my-slack-app';
 ---
 

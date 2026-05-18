@@ -176,6 +176,7 @@ const EXCLUDED_REPOS = new Set(['tightknit-tdx-demo', 'homebrew-tap']);
 
 // Repos to surface even when the GitHub org doesn't expose them (yet).
 // If the live API later returns one of these, the live entry wins.
+// IMPORTANT: only list PUBLIC repos here — private repos render cards that 404 for visitors.
 const MANUAL_REPOS: Repo[] = [
   {
     name: 'slack-hono-template',
