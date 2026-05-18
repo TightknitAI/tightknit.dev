@@ -1,20 +1,29 @@
 ---
 const upstreamRepos = [
   {
+    owner: 'seratch',
     name: 'slack-edge',
     description:
       'Slack app framework for TypeScript edge runtimes — Cloudflare Workers, Deno, Vercel.',
     url: 'https://github.com/seratch/slack-edge',
   },
   {
+    owner: 'seratch',
     name: 'slack-cloudflare-workers',
     description: 'Slack app framework purpose-built for Cloudflare Workers.',
     url: 'https://github.com/seratch/slack-cloudflare-workers',
   },
   {
+    owner: 'seratch',
     name: 'slack-web-api-client',
     description: 'TypeScript Slack Web API client tuned for edge runtimes.',
     url: 'https://github.com/seratch/slack-web-api-client',
+  },
+  {
+    owner: 'themashcodee',
+    name: 'slack-blocks-to-jsx',
+    description: 'Render Slack Block Kit messages as JSX in React apps.',
+    url: 'https://github.com/themashcodee/slack-blocks-to-jsx',
   },
 ];
 ---
@@ -54,7 +63,7 @@ const upstreamRepos = [
           >
             <div class="mb-4 flex items-start justify-between gap-3">
               <div class="font-mono text-[11px] tracking-[0.16em] uppercase opacity-80">
-                seratch / <span class="font-semibold opacity-100">{repo.name}</span>
+                {repo.owner} / <span class="font-semibold opacity-100">{repo.name}</span>
               </div>
               <span
                 class="font-mono text-[16px] leading-none transition-transform group-hover:scale-110 group-hover:rotate-[12deg]"
