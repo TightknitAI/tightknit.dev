@@ -1,6 +1,8 @@
 ---
 import type { Repo } from '../lib/github';
 import { formatRelativeTime } from '../lib/github';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   repo: Repo;
@@ -22,13 +24,21 @@ const headingClass = featured ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl s
 const isInverse = variant === 'pink';
 const subTextColor = isInverse ? 'text-cream/85' : 'text-ink/80';
 const dividerColor = isInverse ? 'border-cream/25' : 'border-ink/15';
+
+const demoUrl = repo.demoUrl;
+const demoHost = demoUrl ? new URL(demoUrl).host : null;
+
+// Demo screenshots are static PNGs in src/assets/demos/, captured by
+// scripts/capture-demos.ts. Filenames must match repo.name exactly so this
+// glob resolves them by name. Add a new demo: capture, drop file, done.
+const demoImages = import.meta.glob<{ default: ImageMetadata }>('../assets/demos/*.png', {
+  eager: true,
+});
+const demoImage = demoImages[`../assets/demos/${repo.name}.png`]?.default ?? null;
 ---
 
-<a
-  href={repo.url}
-  target="_blank"
-  rel="noopener"
-  class={`${variantClass} block p-6 lg:p-7 group focus:outline-none focus-visible:translate-x-[-3px] focus-visible:translate-y-[-3px]`}
+<article
+  class={`${variantClass} p-6 lg:p-7 group relative isolate focus-within:translate-x-[-3px] focus-within:translate-y-[-3px]`}
 >
   <div class="mb-5 flex items-start justify-between gap-4">
     <div class="font-mono text-[11px] tracking-[0.16em] uppercase opacity-80">
@@ -43,12 +53,70 @@ const dividerColor = isInverse ? 'border-cream/25' : 'border-ink/15';
   <h3
     class={`font-display font-bold leading-[0.95] tracking-[-0.03em] ${headingClass} mb-4 break-words`}
   >
-    {repo.name}
+    <a
+      href={repo.url}
+      target="_blank"
+      rel="noopener"
+      class="after:absolute after:inset-0 after:content-[''] focus:outline-none"
+    >
+      {repo.name}
+    </a>
   </h3>
 
   {
     repo.description && (
       <p class={`mb-6 text-[15px] leading-snug lg:text-base ${subTextColor}`}>{repo.description}</p>
+    )
+  }
+
+  {
+    demoUrl && demoImage && demoHost && (
+      <a
+        href={demoUrl}
+        target="_blank"
+        rel="noopener"
+        aria-label={`Open ${repo.name} live demo at ${demoHost}`}
+        class="group/demo relative z-10 mb-6 block"
+      >
+        <Image
+          src={demoImage}
+          alt={`Preview of ${repo.name} running at ${demoHost}`}
+          widths={[400, 800, 1200]}
+          sizes="(min-width: 1024px) 380px, (min-width: 768px) 360px, 100vw"
+          loading="lazy"
+          class="border-ink block aspect-[16/9] w-full border-[3px] object-cover object-top shadow-[4px_4px_0_var(--color-ink)] transition-[transform,box-shadow] group-hover/demo:-translate-x-[2px] group-hover/demo:-translate-y-[2px] group-hover/demo:shadow-[6px_6px_0_var(--color-ink)]"
+        />
+        <span class="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 font-mono text-[11px] font-semibold tracking-[0.14em] uppercase">
+          <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
+            <span aria-hidden="true">▶</span>
+            <span>Live demo</span>
+          </span>
+          <span class="inline-flex items-center gap-1.5 tracking-normal whitespace-nowrap normal-case opacity-75">
+            <span>{demoHost}</span>
+            <span aria-hidden="true" class="transition-transform group-hover/demo:translate-x-0.5">
+              →
+            </span>
+          </span>
+        </span>
+      </a>
+    )
+  }
+
+  {
+    /* Fallback pill: demo URL set but no screenshot captured yet. Keeps the
+       demo discoverable while the next capture run is pending. */
+    demoUrl && !demoImage && demoHost && (
+      <a
+        href={demoUrl}
+        target="_blank"
+        rel="noopener"
+        class="border-ink bg-ink text-cream hover:shadow-brutal-pink relative z-10 mb-6 inline-flex items-center gap-2 border-[2.5px] px-3 py-1.5 font-mono text-[11px] font-semibold tracking-[0.14em] uppercase shadow-[4px_4px_0_var(--color-ink)] transition-[transform,box-shadow] hover:-translate-x-[2px] hover:-translate-y-[2px]"
+      >
+        <span aria-hidden="true">▶</span>
+        <span>Live demo</span>
+        <span class="opacity-50">·</span>
+        <span class="tracking-normal normal-case opacity-80">{demoHost}</span>
+      </a>
     )
   }
 
@@ -84,4 +152,4 @@ const dividerColor = isInverse ? 'border-cream/25' : 'border-ink/15';
     }
     <span class="ml-auto opacity-70">{formatRelativeTime(repo.pushedAt)}</span>
   </div>
-</a>
+</article>

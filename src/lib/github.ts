@@ -4,6 +4,7 @@ export interface Repo {
   description: string | null;
   url: string;
   homepage: string | null;
+  demoUrl: string | null;
   stars: number;
   forks: number;
   language: string | null;
@@ -13,6 +14,15 @@ export interface Repo {
   archived: boolean;
   fork: boolean;
 }
+
+// Hand-curated live demos. The GitHub `homepage` field often points to npm or docs,
+// so we keep these separate. Add a repo here when there's something the visitor can
+// actually click and play with.
+const DEMO_URLS: Record<string, string> = {
+  'block-kitchen': 'https://block-kitchen.tightknit.dev',
+  'slack-block-kit-validator': 'https://block-kit-validator.tightknit.dev',
+  'storybook-addon-slack-block-kit': 'https://block-kit-storybook.tightknit.dev',
+};
 
 interface GitHubRepoApi {
   name: string;
@@ -110,6 +120,7 @@ export async function getOrgRepos(org: string): Promise<Repo[]> {
         description: r.description ? r.description.replace(/\s*—\s*/g, ', ') : null,
         url: r.html_url,
         homepage: r.homepage,
+        demoUrl: DEMO_URLS[r.name] ?? null,
         stars: r.stargazers_count,
         forks: r.forks_count,
         language: r.language,
@@ -131,6 +142,7 @@ const FALLBACK_REPOS: Repo[] = [
     description: 'Compose Slack Block Kit messages with a React-style API.',
     url: 'https://github.com/tightknitai/block-kitchen',
     homepage: null,
+    demoUrl: null,
     stars: 0,
     forks: 0,
     language: 'TypeScript',
@@ -146,6 +158,7 @@ const FALLBACK_REPOS: Repo[] = [
     description: 'Validate Slack Block Kit payloads before you send them.',
     url: 'https://github.com/tightknitai/slack-block-kit-validator',
     homepage: null,
+    demoUrl: null,
     stars: 0,
     forks: 0,
     language: 'TypeScript',
@@ -161,6 +174,7 @@ const FALLBACK_REPOS: Repo[] = [
     description: 'Build Slack apps on Hono. Works on Workers, Bun, Node.',
     url: 'https://github.com/tightknitai/slack-hono',
     homepage: null,
+    demoUrl: null,
     stars: 0,
     forks: 0,
     language: 'TypeScript',
@@ -183,6 +197,7 @@ const MANUAL_REPOS: Repo[] = [
     description: 'Starter template for shipping a Slack app with slack-hono on Cloudflare Workers.',
     url: 'https://github.com/tightknitai/slack-hono-template',
     homepage: null,
+    demoUrl: null,
     stars: 0,
     forks: 0,
     language: 'TypeScript',
@@ -198,7 +213,11 @@ function mergeManual(live: Repo[]): Repo[] {
   const liveNames = new Set(live.map((r) => r.name));
   const additions = MANUAL_REPOS.filter((r) => !liveNames.has(r.name));
   return [...live, ...additions]
-    .map((r) => ({ ...r, topics: sortTopics(r.topics) }))
+    .map((r) => ({
+      ...r,
+      topics: sortTopics(r.topics),
+      demoUrl: r.demoUrl ?? DEMO_URLS[r.name] ?? null,
+    }))
     .sort((a, b) => b.stars - a.stars || a.name.localeCompare(b.name));
 }
 
