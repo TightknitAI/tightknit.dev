@@ -11,6 +11,7 @@
     "deploy": "npm run build && wrangler deploy",
     "wrangler:dev": "wrangler dev",
     "typecheck": "astro check",
+    "capture:demos": "node --experimental-strip-types scripts/capture-demos.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "lefthook install"
@@ -25,6 +26,7 @@
     "@astrojs/check": "^0.9.9",
     "@types/node": "^25.8.0",
     "lefthook": "^2.1.6",
+    "playwright": "^1.60.0",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.0",

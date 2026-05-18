@@ -18,6 +18,7 @@ npm run preview      # preview the static build
 npm run deploy       # build + wrangler deploy
 npm run wrangler:dev # wrangler local dev
 npm run typecheck    # astro check only
+npm run capture:demos # re-snapshot live demos → src/assets/demos/
 npm run format       # prettier --write .
 npm run format:check # prettier --check .
 ```
@@ -29,6 +30,7 @@ npm run format:check # prettier --check .
 - **Node** pinned to 22 LTS via `.nvmrc`.
 - **Featured repos** are hand-picked in `src/components/RepoGrid.astro` via the `FEATURED_NAMES` array; everything else from `tightknitai` renders sorted by stars.
 - **GitHub fetch** at build time — set `GITHUB_TOKEN` to avoid the 60/hr unauthenticated limit. Fallback list lives in `src/lib/github.ts` so the build never breaks.
+- **Live demos** are mapped in `DEMO_URLS` (`src/lib/github.ts`) and shown as a screenshot on the repo card. Re-capture with `npm run capture:demos` after a demo's UI changes; the PNG filename must match the repo name. If a demo URL is set but no screenshot exists yet, the card falls back to a text pill.
 
 ## Design system
 
