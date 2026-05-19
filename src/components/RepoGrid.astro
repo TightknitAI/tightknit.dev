@@ -16,6 +16,11 @@ const featuredSet = new Set(featured.map((r) => r.name));
 const rest = repos.filter((r) => !featuredSet.has(r.name));
 
 const featuredVariants = ['yellow', 'pink', 'cyan'] as const;
+
+// Social-proof stat row — only render once the org has earned some real traction.
+const totalStars = repos.reduce((sum, r) => sum + r.stars, 0);
+const SOCIAL_PROOF_STAR_THRESHOLD = 100;
+const showSocialProof = totalStars >= SOCIAL_PROOF_STAR_THRESHOLD;
 ---
 
 <section id="repos" class="bg-cream border-ink relative border-b-[3px]">
@@ -23,13 +28,33 @@ const featuredVariants = ['yellow', 'pink', 'cyan'] as const;
     <div class="mb-12 flex flex-col gap-6 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
       <div>
         <div class="text-ink/60 mb-3 font-mono text-[12px] tracking-[0.18em] uppercase">
-          // featured
+          // the stack
         </div>
         <h2
           class="font-display text-5xl leading-[0.9] font-bold tracking-[-0.04em] sm:text-6xl lg:text-7xl"
         >
           The Stack.
         </h2>
+        {
+          showSocialProof && (
+            <div
+              class="text-ink/70 mt-5 flex flex-wrap items-center gap-3 font-mono text-[12px] tracking-[0.12em] uppercase"
+              aria-label="repo statistics"
+            >
+              <span>{repos.length} repos</span>
+              <span class="opacity-40" aria-hidden="true">
+                ·
+              </span>
+              <span>
+                <span aria-hidden="true">★</span> {totalStars.toLocaleString('en-US')} stars
+              </span>
+              <span class="opacity-40" aria-hidden="true">
+                ·
+              </span>
+              <span>open source</span>
+            </div>
+          )
+        }
       </div>
       <p class="text-ink/70 max-w-md font-mono text-sm leading-relaxed">
         Block Kit tooling, app frameworks, and validators we use to ship Slack apps faster. Open

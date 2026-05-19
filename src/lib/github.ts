@@ -190,6 +190,7 @@ const EXCLUDED_REPOS = new Set(['tightknit-tdx-demo', 'homebrew-tap']);
 
 // Repos to surface even when the GitHub org doesn't expose them (yet).
 // If the live API later returns one of these, the live entry wins.
+// IMPORTANT: only list PUBLIC repos here — private repos render cards that 404 for visitors.
 const MANUAL_REPOS: Repo[] = [
   {
     name: 'slack-hono-template',
@@ -232,16 +233,29 @@ export async function loadRepos(org: string): Promise<{ repos: Repo[]; usedFallb
   }
 }
 
+// Locale-aware, calendar-correct relative time. `narrow` keeps output compact ("5d ago", "5mo ago").
+const RELATIVE_TIME = new Intl.RelativeTimeFormat('en', {
+  style: 'narrow',
+  numeric: 'auto',
+});
+
 export function formatRelativeTime(iso: string): string {
-  const then = new Date(iso).getTime();
-  const now = Date.now();
-  const diff = Math.max(0, now - then);
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const then = new Date(iso);
+  const now = new Date();
+  const diffMs = now.getTime() - then.getTime();
+  if (diffMs < 0) return 'just now';
+
+  const days = Math.floor(diffMs / 86_400_000);
   if (days < 1) return 'today';
-  if (days === 1) return '1d ago';
-  if (days < 30) return `${days}d ago`;
-  const months = Math.floor(days / 30);
-  if (months < 12) return `${months}mo ago`;
-  const years = Math.floor(days / 365);
-  return `${years}y ago`;
+  if (days < 30) return RELATIVE_TIME.format(-days, 'day');
+
+  // Calendar-aware month diff — avoids the floor-by-30 drift the old impl had.
+  const months =
+    (now.getFullYear() - then.getFullYear()) * 12 +
+    (now.getMonth() - then.getMonth()) -
+    (now.getDate() < then.getDate() ? 1 : 0);
+  if (months < 12) return RELATIVE_TIME.format(-months, 'month');
+
+  const years = Math.floor(months / 12);
+  return RELATIVE_TIME.format(-years, 'year');
 }
